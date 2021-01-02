@@ -1,0 +1,8 @@
+# database
+POSTGRES_PASSWORD=password
+POSTGRES_USER=postgres
+POSTGRES_DB=postgres
+POSTGRES_PORT=5444
+POSTGRES_HOST=3.0.95.43
+
+# other
