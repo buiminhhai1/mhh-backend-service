@@ -1,8 +1,8 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { NguoiDungEntity } from 'src/entities';
 import { NguoiDungService } from '../nguoi-dung';
-import { CredentialDTO, TokenJWTDTO } from './auth.dto';
+import { CredentialDTO, LoginDTO, TokenJWTDTO } from './auth.dto';
 import { AuthService } from './auth.service';
 
 @Controller('auth')
@@ -16,7 +16,13 @@ export class AuthController {
   }
 
   @Post('login')
-  async login(@Body() payload: Partial<CredentialDTO>): Promise<TokenJWTDTO> {
-    return await this.authService.login(payload);
+  async login(@Body() payload: LoginDTO): Promise<TokenJWTDTO> {
+    const credential = await this.nguoiDungService.veriffyUser(payload);
+    return await this.authService.login(credential);
+  }
+
+  @Get('admin')
+  async verifyAdminMiddleware(): Promise<Boolean> {
+    return true;
   }
 }

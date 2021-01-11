@@ -1,7 +1,9 @@
 import * as express from 'express';
+import { NguoiDungVaiTro } from 'src/entities';
 
 export interface CustomHttpRequest extends express.Request {
   tenantId: string;
-  userId: string;
-  email: string;
+  id: string;
+  tenDangNhap: string;
+  vaiTro: NguoiDungVaiTro;
 }

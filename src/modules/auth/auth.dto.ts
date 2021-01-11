@@ -3,7 +3,19 @@ import { IsEmail, IsEnum, IsNotEmpty, IsString } from 'class-validator';
 import { NguoiDungVaiTro } from 'src/entities/nguoi-dung.entity';
 
 export class TokenJWTDTO {
-  access_token: string;
+  public access_token: string;
+}
+
+export class LoginDTO {
+  @ApiProperty()
+  @IsNotEmpty()
+  @IsString()
+  public tenDangNhap: string;
+
+  @ApiProperty()
+  @IsNotEmpty()
+  @IsString()
+  public matKhau: string;
 }
 
 export class CredentialDTO {

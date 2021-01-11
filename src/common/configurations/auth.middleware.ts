@@ -1,37 +1,35 @@
+import { JwtService } from '@nestjs/jwt';
 import { Injectable, Logger, NestMiddleware, UnauthorizedException } from '@nestjs/common';
 import { AuthService } from 'src/modules/auth';
 import { devTenant, isProduction } from '../constants';
 import { CustomHttpRequest } from '../interfaces';
+import { NguoiDungEntity } from 'src/entities';
 
 @Injectable()
 export class AuthMiddleware implements NestMiddleware {
-  constructor(private readonly authService: AuthService) {}
+  constructor(private readonly jwtService: JwtService) {}
 
   private readonly logger = new Logger(AuthMiddleware.name);
 
   async use(req: CustomHttpRequest, res: Response, next: () => void) {
-    // Setup default tenant for dev local
-    if (!isProduction) {
-      req.tenantId = devTenant;
-      req.userId = devTenant;
-      next();
-      return;
-    }
-
-    const authorizationHeader = <string>req.headers['x-access-token'] || '';
+    const authorizationHeader = <string>req.headers['authorization'] || '';
+    console.log(authorizationHeader);
     if (authorizationHeader) {
       try {
-        this.logger.log('- Got header x-access-token');
+        this.logger.log('- Got header authorization');
         this.logger.log(authorizationHeader);
-        const payload = await this.authService.decode(authorizationHeader);
-        req.tenantId = payload.tenantId;
-        req.userId = payload.userId;
-        req.email = payload.email;
+        const jwts = authorizationHeader.split(' ');
+        if (jwts.length === 2) {
+          const user: Partial<NguoiDungEntity> = await this.jwtService.verifyAsync(jwts[1]);
+          req.id = user.id;
+          req.tenDangNhap = user.tenDangNhap;
+          req.vaiTro = user.vaiTro;
+        }
       } catch (e) {
         this.logger.error(JSON.stringify(e, null, 2));
       }
     } else {
-      throw new UnauthorizedException('Missing x-access-token in header');
+      throw new UnauthorizedException('Token invalid');
     }
     next();
   }

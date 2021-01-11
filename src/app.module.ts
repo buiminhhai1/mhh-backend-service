@@ -1,7 +1,7 @@
 import { NguoiDungModule } from './modules/nguoi-dung';
 import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { JwtModule } from '@nestjs/jwt';
-import { AuthMiddleware, JWTConfigurationProvider } from './common/configurations';
+import { AdminContextMiddleware, AuthMiddleware, JWTConfigurationProvider, TenantContextMiddleware } from './common/configurations';
 import { AuthModule, AuthService } from './modules/auth';
 import { DatabaseModule } from './modules/database';
 @Module({
@@ -19,6 +19,9 @@ import { DatabaseModule } from './modules/database';
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
-    return consumer.apply(AuthMiddleware).exclude('/swagger', '/health', '/auth/register').forRoutes('*');
+    return consumer
+      .apply(TenantContextMiddleware).forRoutes('*')
+      .apply(AuthMiddleware).exclude('/swagger', '/health', '/auth/register', '/auth/login').forRoutes('*')
+      .apply(AdminContextMiddleware).forRoutes('/auth/admin');
   }
 }

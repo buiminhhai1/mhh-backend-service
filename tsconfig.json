@@ -20,7 +20,7 @@
     "incremental": true
   },
   "include": [
-    "**/*.ts"
+    "**/*.ts", "**/**/*.ts"
   ],
   "exclude": ["node_modules", "test", "dist", "**/*spec.ts"]
 }

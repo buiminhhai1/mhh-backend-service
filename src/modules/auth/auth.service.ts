@@ -1,22 +1,26 @@
 import { ConflictException, Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { IsEmail, IsString, IsUUID } from 'class-validator';
+import { IsEmail, IsEnum, IsString, IsUUID } from 'class-validator';
 import * as bcrypt from 'bcrypt';
 import { omit } from 'lodash';
-import { CredentialDTO, TokenJWTDTO } from './auth.dto';
+import { CredentialDTO, TokenJWTDTO, LoginDTO } from './auth.dto';
+import { NguoiDungEntity, NguoiDungVaiTro } from 'src/entities';
 
 export class AuthPayloadDTO {
   @IsUUID()
   tenantId: string;
 
   @IsUUID()
-  userId: string;
+  id: string;
 
   @IsString()
-  username: string;
+  tenDangNhap: string;
 
   @IsEmail()
   email: string;
+
+  @IsEnum(NguoiDungVaiTro)
+  vaiTro: NguoiDungVaiTro;
 }
 
 @Injectable()
@@ -34,10 +38,9 @@ export class AuthService {
       throw new UnauthorizedException('Access Token illegal');
     }
   }
-  async login(payload): Promise<TokenJWTDTO> {
-    const credential = { username: payload.username, sub: payload.id };
+  async login(payload: Partial<NguoiDungEntity>): Promise<TokenJWTDTO> {
     return {
-      access_token: await this.encode(credential),
+      access_token: await this.encode(payload),
     };
   }
 }
