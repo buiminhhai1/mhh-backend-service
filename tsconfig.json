@@ -1,15 +1,26 @@
 {
   "compilerOptions": {
-    "module": "commonjs",
-    "declaration": true,
-    "removeComments": true,
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
-    "allowSyntheticDefaultImports": true,
-    "target": "es2017",
-    "sourceMap": true,
+    "rootDir": "./src",
     "outDir": "./dist",
     "baseUrl": "./",
+
+    "target": "es2015",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "types": ["node"],
+    "lib": [ "DOM", "ES2015", "ES2016", "ES2017"],
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "declaration": true,
+    "pretty": true,
+    "removeComments": true,
+    "skipLibCheck": true,
+    "allowSyntheticDefaultImports": true,
+    "sourceMap": true,
     "incremental": true
-  }
+  },
+  "include": [
+    "**/*.ts"
+  ],
+  "exclude": ["node_modules", "test", "dist", "**/*spec.ts"]
 }
