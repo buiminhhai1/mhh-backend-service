@@ -17,10 +17,10 @@
     "skipLibCheck": true,
     "allowSyntheticDefaultImports": true,
     "sourceMap": true,
-    "incremental": true
+    "incremental": true,
   },
   "include": [
-    "**/*.ts", "**/**/*.ts"
+    "**/*.ts", "**/**/*.ts", "**/src/**/*.ts"
   ],
   "exclude": ["node_modules", "test", "dist", "**/*spec.ts"]
 }
