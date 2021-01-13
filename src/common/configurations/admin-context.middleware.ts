@@ -1,5 +1,5 @@
 import { ForbiddenException, Injectable, Logger, NestMiddleware } from "@nestjs/common";
-import { NguoiDungVaiTro } from "src/entities";
+import { NguoiDungVaiTro } from "../../entities";
 import { CustomHttpRequest } from "../interfaces";
 
 @Injectable()

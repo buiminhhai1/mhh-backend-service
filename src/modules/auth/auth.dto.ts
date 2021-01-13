@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsEmail, IsEnum, IsNotEmpty, IsString } from 'class-validator';
-import { NguoiDungVaiTro } from 'src/entities/nguoi-dung.entity';
+import { NguoiDungVaiTro } from '../../entities/nguoi-dung.entity';
 
 export class TokenJWTDTO {
   public access_token: string;

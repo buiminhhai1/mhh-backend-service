@@ -1,4 +1,4 @@
-import { BaseEntity } from 'src/common';
+import { BaseEntity } from './base';
 import { Column, Entity, OneToMany, Unique } from 'typeorm';
 import { ChiTietBanHangEntity } from './chi-tiet-ban-hang.entity';
 import { PhieuDatHangEntity } from './phieu-dat-hang.entity';

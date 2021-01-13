@@ -1,9 +1,7 @@
 import { JwtService } from '@nestjs/jwt';
 import { Injectable, Logger, NestMiddleware, UnauthorizedException } from '@nestjs/common';
-import { AuthService } from 'src/modules/auth';
-import { devTenant, isProduction } from '../constants';
 import { CustomHttpRequest } from '../interfaces';
-import { NguoiDungEntity } from 'src/entities';
+import { NguoiDungEntity } from '../../entities';
 
 @Injectable()
 export class AuthMiddleware implements NestMiddleware {

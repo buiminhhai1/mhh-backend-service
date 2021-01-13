@@ -1,4 +1,4 @@
-import { NguoiDungEntity } from 'src/entities';
+import { NguoiDungEntity } from '../../entities';
 import { EntityRepository, Repository } from 'typeorm';
 
 @EntityRepository(NguoiDungEntity)

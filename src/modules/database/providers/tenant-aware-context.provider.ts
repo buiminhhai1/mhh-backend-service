@@ -1,6 +1,6 @@
 import { Logger, Scope } from '@nestjs/common';
 import { REQUEST } from '@nestjs/core';
-import { CustomHttpRequest } from 'src/common';
+import { CustomHttpRequest } from '../../../common';
 
 export const TenantAwareContext = 'TOKEN__TenantAwareContext';
 const logger = new Logger('TenantAwareContextProvider');

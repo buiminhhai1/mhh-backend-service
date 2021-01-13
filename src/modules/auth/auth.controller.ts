@@ -1,6 +1,6 @@
 import { Body, Controller, Get, Post } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
-import { NguoiDungEntity } from 'src/entities';
+import { NguoiDungEntity } from '../../entities';
 import { NguoiDungService } from '../nguoi-dung';
 import { CredentialDTO, LoginDTO, TokenJWTDTO } from './auth.dto';
 import { AuthService } from './auth.service';

@@ -3,7 +3,7 @@ import { ConflictException, Injectable, UnauthorizedException } from '@nestjs/co
 import * as bcrypt from 'bcrypt';
 import { NguoiDungRepository } from './nguoi-dung.repository';
 import { CredentialDTO, LoginDTO } from '../auth/auth.dto';
-import { NguoiDungEntity } from 'src/entities';
+import { NguoiDungEntity } from '../../entities';
 
 @Injectable()
 export class NguoiDungService {

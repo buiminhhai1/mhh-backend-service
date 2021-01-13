@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { scanComponents, scanEntities } from 'src/common';
+import { scanComponents, scanEntities } from '../../common';
 import * as repositories from './nguoi-dung.repository';
 import { NguoiDungService } from './nguoi-dung.service';
 

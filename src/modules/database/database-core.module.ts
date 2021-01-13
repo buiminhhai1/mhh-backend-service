@@ -1,7 +1,8 @@
 import { Logger, OnModuleInit } from '@nestjs/common';
-import { databaseOptions, devTenant } from 'src/common';
+import { databaseOptions, devTenant } from '../../common';
 import { getConnectionManager } from 'typeorm';
 import { PostgresConnectionOptions } from 'typeorm/driver/postgres/PostgresConnectionOptions';
+import { stringify } from 'querystring';
 
 const logger = new Logger('DatabaseModuleCore');
 
@@ -11,6 +12,7 @@ export class DatabaseCoreModule implements OnModuleInit {
     const connectionManager = getConnectionManager();
     if (!connectionManager.has('system')) {
       logger.log(' - Setting up system database connection...');
+      logger.log(JSON.stringify(databaseOptions))
       const connection = connectionManager.create({
         ...databaseOptions,
         name: 'system',

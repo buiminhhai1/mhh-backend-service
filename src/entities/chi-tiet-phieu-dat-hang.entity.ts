@@ -1,5 +1,5 @@
 import { Column, Entity, ManyToOne } from 'typeorm';
-import { BaseEntity } from 'src/common';
+import { BaseEntity } from './base';
 import { PhieuDatHangEntity } from './phieu-dat-hang.entity';
 import { SachEntity } from './sach.entity';
 

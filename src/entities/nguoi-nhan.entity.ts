@@ -1,4 +1,4 @@
-import { BaseEntity } from '../common';
+import { BaseEntity } from './base';
 import { Column, Entity, OneToMany } from 'typeorm';
 import { PhieuDatHangEntity } from './phieu-dat-hang.entity';
 

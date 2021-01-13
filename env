@@ -1,0 +1,14 @@
+# database
+export TYPEORM_CONNECTION="postgres"
+export POSTGRES_PASSWORD=password
+export POSTGRES_USER=postgres
+export POSTGRES_DB=postgres
+export POSTGRES_PORT=5444
+export POSTGRES_HOST=3.0.95.43
+export DATABASE_URI=postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@${POSTGRES_HOST}:${POSTGRES_PORT}/${POSTGRES_DB}
+
+export DEV_TENANT_ID='73e7859d-49e3-4a4f-bff7-9b03df1da0eb'
+# other
+export JWT_SECRET=jwt_secret
+export NODE_ENV=development
+export PORT=6060

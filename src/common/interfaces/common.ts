@@ -1,5 +1,5 @@
 import * as express from 'express';
-import { NguoiDungVaiTro } from 'src/entities';
+import { NguoiDungVaiTro } from '../../entities';
 
 export interface CustomHttpRequest extends express.Request {
   tenantId: string;
