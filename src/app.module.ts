@@ -4,6 +4,7 @@ import { JwtModule } from '@nestjs/jwt';
 import { AdminContextMiddleware, AuthMiddleware, JWTConfigurationProvider, TenantContextMiddleware } from './common/configurations';
 import { AuthModule, AuthService } from './modules/auth';
 import { DatabaseModule } from './modules/database';
+import { LoaiSachModule } from './modules/loai-sach';
 @Module({
   imports: [
     DatabaseModule.register(),
@@ -13,6 +14,7 @@ import { DatabaseModule } from './modules/database';
       global: true,
     },
     AuthModule,
+    LoaiSachModule,
   ],
   providers: [AuthService],
   exports: [AuthService],
