@@ -8,7 +8,7 @@ export class LoaiSachService {
   constructor(private readonly loaiRepo: LoaiSachRepository) {}
 
   async getAllCategories(): Promise<LoaiSachEntity[]> {
-    return await this.loaiRepo.createQueryBuilder('category').orderBy('category.id', 'ASC').getMany();
+    return await this.loaiRepo.createQueryBuilder('category').orderBy('category.createdAt', 'ASC').getMany();
   }
 
   async createCategory(payload: LoaiSachDTO): Promise<LoaiSachEntity> {
