@@ -2,8 +2,6 @@ module.exports = {
   apps: [
     {
       name: "backend-service",
-      instances: 2,
-      exec_mode: 'cluster',
       script: "node dist/main.js",
       env: {
           "PORT":"6060",
