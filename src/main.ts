@@ -26,7 +26,11 @@ const bootstrapApplication = async () => {
       origin: '*',
     });
   } else {
-    app.enableCors();
+    app.enableCors({
+      methods: '*',
+      allowedHeaders: '*',
+      origin: '*',
+    });
   }
 
   app.use(helmet());
