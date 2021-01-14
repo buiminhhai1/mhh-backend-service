@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsEmail, IsEnum, IsNotEmpty, IsString } from 'class-validator';
-import { NguoiDungVaiTro } from '../../entities/nguoi-dung.entity';
+import { NguoiDungEntity, NguoiDungVaiTro } from '../../entities/nguoi-dung.entity';
 
 export class TokenJWTDTO {
   public access_token: string;
@@ -51,4 +51,19 @@ export class CredentialDTO {
   @ApiProperty({ enum: NguoiDungVaiTro, examples: [NguoiDungVaiTro.khachHang, NguoiDungVaiTro.quanLy] })
   @IsEnum(NguoiDungVaiTro)
   public vaiTro: NguoiDungVaiTro;
+}
+
+
+export class PaginationAuthDTO {
+  @ApiProperty()
+  page: string;
+
+  @ApiProperty()
+  limit: string;
+}
+
+export class GenericNguoiDungResponsive {
+  data: Partial<NguoiDungEntity>[];
+  total: number;
+  next: number;
 }

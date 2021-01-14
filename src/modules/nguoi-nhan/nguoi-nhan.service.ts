@@ -8,12 +8,12 @@ export class NguoiNhanService {
   constructor(private readonly nguoiNhanRepo: NguoiNhanRepository) {}
 
   async createReciever(payload: NguoiNhanDTO): Promise<NguoiNhanEntity> {
-    return this.nguoiNhanRepo.save(this.nguoiNhanRepo.create(payload));
+    return await this.nguoiNhanRepo.save(this.nguoiNhanRepo.create(payload));
   }
 
   async getRecieversByUserId(id: string): Promise<NguoiNhanEntity[]> {
-    return this.nguoiNhanRepo.createQueryBuilder('reciever')
-      .where('reciver.nguoiDung.id = :id', { id })
+    return await this.nguoiNhanRepo.createQueryBuilder('reciever')
+      .where('reciever.nguoiDung.id = :id', { id })
       .getMany();
   }
 

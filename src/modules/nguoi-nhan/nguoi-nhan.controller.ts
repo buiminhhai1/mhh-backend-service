@@ -16,7 +16,8 @@ export class NguoiNhanController {
 
   @Get()
   async getRecieverByUserId(@Query() payload: QueryNguoiNhan): Promise<NguoiNhanEntity[]> {
-    return this.nguoiNhanService.getRecieversByUserId(payload.nguoiNhanId);
+    console.log('payload', payload);
+    return this.nguoiNhanService.getRecieversByUserId(payload.nguoiDungId);
   }
 
   @Put(':id')

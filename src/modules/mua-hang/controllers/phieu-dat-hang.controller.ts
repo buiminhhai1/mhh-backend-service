@@ -25,7 +25,7 @@ export class PhieuDatHangController {
   }
 
   @Get()
-  async getOrderByUserId(@Query('id') id: string) {
-
+  async getOrderByUserId(@Query('nguoiDungId') id: string) {
+    return this.pdhService.getOrderByUserId(id);
   }
 }

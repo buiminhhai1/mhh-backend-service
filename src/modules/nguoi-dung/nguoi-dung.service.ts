@@ -1,8 +1,9 @@
+import { DEFAULT_LIMIT, DEFAULT_PAGE } from './../../common/constants/pagination';
 import { omit } from 'lodash';
 import { ConflictException, Injectable, UnauthorizedException } from '@nestjs/common';
 import * as bcrypt from 'bcrypt';
 import { NguoiDungRepository } from './nguoi-dung.repository';
-import { CredentialDTO, LoginDTO } from '../auth/auth.dto';
+import { CredentialDTO, GenericNguoiDungResponsive, LoginDTO, PaginationAuthDTO } from '../auth/auth.dto';
 import { NguoiDungEntity } from '../../entities';
 
 @Injectable()
@@ -31,5 +32,18 @@ export class NguoiDungService {
       throw new UnauthorizedException(`nguoi dung: ${payload.tenDangNhap} khong ton tai`);
     }
     return omit(user, 'matKhau');
+  }
+
+  async getUsers(payload: PaginationAuthDTO): Promise<GenericNguoiDungResponsive> {
+    const pageSize = +payload.limit || DEFAULT_LIMIT;
+    const pageNumber = +payload.page || DEFAULT_PAGE;
+    const res = await this.nguoiDungRepo.createQueryBuilder('user')
+      .orderBy('user.createdAt', 'ASC')
+      .limit(pageSize)
+      .skip(pageNumber)
+      .getManyAndCount();
+      const data = res[0].map(item => omit(item, 'matKhau'));
+      const next = pageSize * (pageNumber + 1 ) < res[1] ? pageNumber+ 1: -1;
+      return { data, total: res[1], next }
   }
 }

@@ -20,7 +20,9 @@ export class PhieuDatHangDTO {
   @IsNotEmpty()
   nguoiMua: NguoiDungEntity;
 
-  @ApiProperty()
+  @ApiProperty({
+    example: [{ sach: {id: 'id sach'}, soLuong: 10, donGiaHienHanh: 2000 }]
+  })
   @IsNotEmpty()
   dsChiTietPhieuDatHang: ChiTietPhieuDatHangDTO[];
 

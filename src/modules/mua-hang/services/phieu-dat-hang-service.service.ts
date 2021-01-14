@@ -35,6 +35,7 @@ export class PhieuDatHangService {
   }
 
   async getOrderByUserId(id: string): Promise<PhieuDatHangEntity[]> {
-    return await this.pdhRepo.find({ where: { nguoiMua : { id }}, relations: ['dsChiTietPhieuDatHang']});
+    return await this.pdhRepo.find({ where: { nguoiMua : { id }},
+    });
   }
 }

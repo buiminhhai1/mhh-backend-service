@@ -1,8 +1,9 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post, Query, UseGuards } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { NguoiDungEntity } from '../../entities';
 import { NguoiDungService } from '../nguoi-dung';
-import { CredentialDTO, LoginDTO, TokenJWTDTO } from './auth.dto';
+import { AdminGuard } from './admin.guard';
+import { CredentialDTO, GenericNguoiDungResponsive, LoginDTO, PaginationAuthDTO, TokenJWTDTO } from './auth.dto';
 import { AuthService } from './auth.service';
 
 @Controller('auth')
@@ -19,6 +20,12 @@ export class AuthController {
   async login(@Body() payload: LoginDTO): Promise<TokenJWTDTO> {
     const credential = await this.nguoiDungService.veriffyUser(payload);
     return await this.authService.login(credential);
+  }
+
+  @Get('users')
+  @UseGuards(new AdminGuard())
+  async getUsers(@Query() payload: PaginationAuthDTO): Promise<GenericNguoiDungResponsive> {
+    return await this.nguoiDungService.getUsers(payload);
   }
 
   @Get('admin')

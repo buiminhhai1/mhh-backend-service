@@ -18,6 +18,6 @@ export class PhieuDatHangEntity extends BaseEntity {
   @ManyToOne(() => NguoiDungEntity, (nguoiMua) => nguoiMua.dsPhieuDatHang)
   public nguoiMua: NguoiDungEntity;
 
-  @OneToMany(() => ChiTietPhieuDatHangEntity, (ctpdh) => ctpdh.phieuDatHang, { onDelete: 'CASCADE' })
+  @OneToMany(() => ChiTietPhieuDatHangEntity, (ctpdh) => ctpdh.phieuDatHang, { onDelete: 'CASCADE' , eager: true })
   public dsChiTietPhieuDatHang: ChiTietPhieuDatHangEntity[];
 }

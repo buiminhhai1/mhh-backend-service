@@ -21,7 +21,7 @@ export class SachService {
       .limit(pageSize)
       .skip(pageNumber)
       .getManyAndCount();
-    const next = pageSize * (pageNumber + 1 ) < res[1] ? pageNumber+ 1: -1
+    const next = pageSize * (pageNumber + 1 ) < res[1] ? pageNumber+ 1: -1;
     return { data: res[0], total: res[1], next };
   }
 
