@@ -1,7 +1,6 @@
 import { BaseEntity } from './base';
-import { Column, Entity, OneToMany } from 'typeorm';
+import { Column, Entity, IsNull, OneToMany } from 'typeorm';
 import { SachEntity } from './sach.entity';
-
 @Entity()
 export class TacGiaEntity extends BaseEntity {
   @Column()
@@ -10,7 +9,7 @@ export class TacGiaEntity extends BaseEntity {
   @Column()
   public ngaySinh: Date;
 
-  @Column()
+  @Column({ nullable: true})
   public ngayMat: Date;
 
   @Column()

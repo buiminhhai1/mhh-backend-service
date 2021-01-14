@@ -5,6 +5,8 @@ import { AdminContextMiddleware, AuthMiddleware, JWTConfigurationProvider, Tenan
 import { AuthModule, AuthService } from './modules/auth';
 import { DatabaseModule } from './modules/database';
 import { LoaiSachModule } from './modules/loai-sach';
+import { SachModule } from './modules/sach';
+import { TacGiaModule } from './modules/tac-gia';
 @Module({
   imports: [
     DatabaseModule.register(),
@@ -15,6 +17,8 @@ import { LoaiSachModule } from './modules/loai-sach';
     },
     AuthModule,
     LoaiSachModule,
+    TacGiaModule,
+    SachModule
   ],
   providers: [AuthService],
   exports: [AuthService],
