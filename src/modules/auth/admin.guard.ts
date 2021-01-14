@@ -1,5 +1,5 @@
 import { CanActivate, ExecutionContext, Injectable } from '@nestjs/common';
-import { NguoiDungVaiTro } from 'src/entities';
+import { NguoiDungVaiTro } from '../../entities';
 
 @Injectable()
 export class AdminGuard implements CanActivate {

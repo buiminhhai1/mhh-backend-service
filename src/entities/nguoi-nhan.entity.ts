@@ -1,6 +1,7 @@
 import { BaseEntity } from './base';
-import { Column, Entity, OneToMany } from 'typeorm';
+import { Column, Entity, ManyToOne, OneToMany } from 'typeorm';
 import { PhieuDatHangEntity } from './phieu-dat-hang.entity';
+import { NguoiDungEntity } from './nguoi-dung.entity';
 
 @Entity()
 export class NguoiNhanEntity extends BaseEntity {
@@ -15,4 +16,7 @@ export class NguoiNhanEntity extends BaseEntity {
 
   @OneToMany(() => PhieuDatHangEntity, (pdh) => pdh.nguoiNhan, { onDelete: 'CASCADE' })
   public dsPhieuDatHang: PhieuDatHangEntity[];
+
+  @ManyToOne(() => NguoiDungEntity, (user) => user.dsNguoiNhan)
+  public nguoiDung: NguoiDungEntity;
 }

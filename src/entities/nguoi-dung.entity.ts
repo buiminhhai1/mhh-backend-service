@@ -2,6 +2,7 @@ import { BaseEntity } from './base';
 import { Column, Entity, OneToMany, Unique } from 'typeorm';
 import { ChiTietBanHangEntity } from './chi-tiet-ban-hang.entity';
 import { PhieuDatHangEntity } from './phieu-dat-hang.entity';
+import { NguoiNhanEntity } from './nguoi-nhan.entity';
 
 export enum NguoiDungVaiTro {
   quanLy = 'quan_ly',
@@ -38,4 +39,7 @@ export class NguoiDungEntity extends BaseEntity {
 
   @OneToMany(() => ChiTietBanHangEntity, (ds) => ds.nguoiDung)
   public dsSachBan: ChiTietBanHangEntity[];
+
+  @OneToMany(() => NguoiNhanEntity, (nnhan) => nnhan.nguoiDung, { onDelete: 'CASCADE'})
+  public dsNguoiNhan: NguoiNhanEntity[];
 }
