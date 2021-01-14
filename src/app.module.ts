@@ -8,6 +8,7 @@ import { LoaiSachModule } from './modules/loai-sach';
 import { SachModule } from './modules/sach';
 import { TacGiaModule } from './modules/tac-gia';
 import { NguoiNhanModule } from './modules/nguoi-nhan';
+import { MuaHangModule } from './modules/mua-hang';
 @Module({
   imports: [
     DatabaseModule.register(),
@@ -21,6 +22,7 @@ import { NguoiNhanModule } from './modules/nguoi-nhan';
     TacGiaModule,
     SachModule,
     NguoiNhanModule,
+    MuaHangModule
   ],
   providers: [AuthService],
   exports: [AuthService],

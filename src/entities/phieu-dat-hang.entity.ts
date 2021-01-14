@@ -9,8 +9,8 @@ export class PhieuDatHangEntity extends BaseEntity {
   @Column()
   public ngayMua: Date;
 
-  @Column()
-  public ngayGia: Date;
+  @Column({ nullable: true })
+  public ngayGiao: Date;
 
   @ManyToOne(() => NguoiNhanEntity, (nguoiNhan) => nguoiNhan.dsPhieuDatHang)
   public nguoiNhan: NguoiNhanEntity;
