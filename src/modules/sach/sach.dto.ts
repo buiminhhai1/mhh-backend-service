@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsNotEmpty, IsNumber, IsString, IsUrl } from 'class-validator';
-import { LoaiSachEntity, TacGiaEntity } from '../../entities';
+import { LoaiSachEntity, SachEntity, TacGiaEntity } from '../../entities';
 
 export class SachDTO {
   @IsNotEmpty()
@@ -34,13 +34,27 @@ export class SachDTO {
 }
 
 export class QuerySachDTO {
+  @ApiProperty()
   @IsNotEmpty()
   @IsString()
   loaiId: string;
 
-  @IsNumber()
-  page: number;
+  @ApiProperty()
+  page: string;
 
-  @IsNumber()
-  limit: number;
+  @ApiProperty()
+  limit: string;
+}
+
+export class QueryPaginationDTO {
+  @ApiProperty()
+  page: string;
+
+  @ApiProperty()
+  limit: string;
+}
+export class GenericSachReponse {
+  data: SachEntity[];
+  total: number;
+  next: number;
 }
