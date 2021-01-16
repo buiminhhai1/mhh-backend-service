@@ -9,7 +9,8 @@ import { AuthModule } from "../auth";
 @Module({
   imports: [TypeOrmModule.forFeature([...scanEntities(repositories)]), AuthModule],
   controllers: [...scanComponents(controllers)],
-  providers: [...scanComponents(services)]
+  providers: [...scanComponents(services)],
+  exports: [...scanComponents(services)],
 })
 export class TacGiaModule {
 

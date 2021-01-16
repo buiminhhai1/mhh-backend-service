@@ -7,24 +7,24 @@ import { TenantAwareContext } from '../providers';
 
 @Injectable()
 export class TypeOrmConfigService implements TypeOrmOptionsFactory {
-  @Inject(TenantAwareContext) private readonly tenantId: string;
+  @Inject(TenantAwareContext) private readonly context: TenantAwareContext;
 
   private readonly logger = new Logger(TypeOrmConfigService.name);
 
   async createTypeOrmOptions(): Promise<any> {
-    if (this.tenantId) {
-      const isHaveConnection = getConnectionManager().has(this.tenantId);
+    if (this.context.tenantId) {
+      const isHaveConnection = getConnectionManager().has(this.context.tenantId);
       this.logger.log(
         isHaveConnection
-          ? `-Reuse connection for tenantId: ${this.tenantId}`
-          : `-Create new connectdion for tenantId: ${this.tenantId}`,
+          ? `-Reuse connection for tenantId: ${this.context.tenantId}`
+          : `-Create new connectdion for tenantId: ${this.context.tenantId}`,
       );
     }
 
     return {
       ...databaseOptions,
-      name: this.tenantId,
-      schema: this.tenantId,
+      name: this.context.tenantId,
+      schema: this.context.tenantId,
     };
   }
 }

@@ -25,12 +25,16 @@ export class SachDTO {
   nhaXuatBan: string;
 
   @IsNotEmpty()
-  @ApiProperty({ example: { id: 'id'}})
+  @ApiProperty({ example: { name: 'nhap ten tac gia vo' }})
   tacGia: TacGiaEntity;
 
   @IsNotEmpty()
   @ApiProperty({ example: {id: 'id loai' }})
   loai: LoaiSachEntity;
+
+  @IsNotEmpty()
+  @ApiProperty({ example: 10 })
+  soLuong: number;
 }
 
 export class QuerySachDTO {

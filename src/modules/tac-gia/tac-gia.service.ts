@@ -1,6 +1,6 @@
 import { Injectable } from "@nestjs/common";
 import { TacGiaEntity } from "../../entities";
-import { TacGiaDTO } from "./tac-gia.dto";
+import { TacGiaDTO, TacGiaQuery } from "./tac-gia.dto";
 import { TacGiaRepository } from "./tac-gia.repository";
 
 @Injectable()
@@ -15,7 +15,12 @@ export class TacGiaService {
     await this.tacGiaRepo.update(id, payload);
   }
 
-  async getAllAuths(): Promise<TacGiaEntity[]> {
+  async getAllAuths(queries: TacGiaQuery): Promise<TacGiaEntity[]> {
+    if (queries.ten) {
+      return this.tacGiaRepo.createQueryBuilder('auth')
+        .where('ten = :ten', { ten: queries.ten })
+        .getMany();
+    }
     return this.tacGiaRepo.createQueryBuilder('auth').getMany();
   }
 

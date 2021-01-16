@@ -19,3 +19,9 @@ export class TacGiaDTO {
   @IsUrl()
   public anh: string;
 }
+
+export class TacGiaQuery {
+  @ApiProperty()
+  @IsOptional()
+  public ten: string;
+}

@@ -11,7 +11,6 @@ export class AuthMiddleware implements NestMiddleware {
 
   async use(req: CustomHttpRequest, res: Response, next: () => void) {
     const authorizationHeader = <string>req.headers['authorization'] || '';
-    console.log(authorizationHeader);
     if (authorizationHeader) {
       try {
         this.logger.log('- Got header authorization');

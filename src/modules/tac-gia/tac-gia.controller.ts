@@ -1,8 +1,8 @@
-import { Body, Controller, Get, Param, Post, Put, UseGuards } from "@nestjs/common";
+import { Body, Controller, Get, Param, Post, Put, Query, UseGuards } from "@nestjs/common";
 import { ApiTags } from "@nestjs/swagger";
 import { TacGiaEntity } from "../../entities";
 import { AdminGuard } from "../auth/admin.guard";
-import { TacGiaDTO } from "./tac-gia.dto";
+import { TacGiaDTO, TacGiaQuery } from "./tac-gia.dto";
 import { TacGiaService } from "./tac-gia.service";
 
 @Controller('authors')
@@ -21,8 +21,8 @@ export class TacGiaController {
   }
 
   @Get()
-  async getAllAuthors(): Promise<TacGiaEntity[]> {
-    return this.tacGiaService.getAllAuths();
+  async getAllAuthors(@Query() queries: TacGiaQuery): Promise<TacGiaEntity[]> {
+    return this.tacGiaService.getAllAuths(queries);
   }
 
   @Put(':id')
@@ -30,4 +30,6 @@ export class TacGiaController {
   async updateAuthor(@Body() payload: TacGiaDTO, @Param('id') id: string): Promise<void> {
     return this.tacGiaService.updateAuth(payload, id);
   }
+
+
 }

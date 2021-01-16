@@ -1,4 +1,4 @@
-import { SachEntity } from '../../entities';
+import { SachEntity } from '../../../entities';
 import { EntityRepository, Repository } from 'typeorm';
 
 @EntityRepository(SachEntity)

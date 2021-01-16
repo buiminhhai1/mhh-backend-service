@@ -1,25 +1,9 @@
 import { ConflictException, Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { IsEmail, IsEnum, IsString, IsUUID } from 'class-validator';
-import { TokenJWTDTO } from './auth.dto';
+import { AuthPayloadDTO, TokenJWTDTO } from './auth.dto';
 import { NguoiDungEntity, NguoiDungVaiTro } from '../../entities';
 
-export class AuthPayloadDTO {
-  @IsUUID()
-  tenantId: string;
-
-  @IsUUID()
-  id: string;
-
-  @IsString()
-  tenDangNhap: string;
-
-  @IsEmail()
-  email: string;
-
-  @IsEnum(NguoiDungVaiTro)
-  vaiTro: NguoiDungVaiTro;
-}
 
 @Injectable()
 export class AuthService {

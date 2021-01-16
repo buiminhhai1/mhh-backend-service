@@ -3,6 +3,7 @@ import { Column, Entity, OneToMany, Unique } from 'typeorm';
 import { ChiTietBanHangEntity } from './chi-tiet-ban-hang.entity';
 import { PhieuDatHangEntity } from './phieu-dat-hang.entity';
 import { NguoiNhanEntity } from './nguoi-nhan.entity';
+import { SachEntity } from './sach.entity';
 
 export enum NguoiDungVaiTro {
   quanLy = 'quan_ly',

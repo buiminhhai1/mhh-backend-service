@@ -3,9 +3,7 @@ import { Connection } from 'typeorm';
 
 @Injectable()
 export class TenantMigrationService {
-  constructor(private readonly databaseConnection: Connection) {
-    console.log('database connecdtion', this.databaseConnection);
-  }
+  constructor(private readonly databaseConnection: Connection) {}
   private readonly logger = new Logger(TenantMigrationService.name);
 
   async onNewTenant(tenantId: string) {

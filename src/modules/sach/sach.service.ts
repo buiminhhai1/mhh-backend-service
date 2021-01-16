@@ -1,15 +1,31 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import { DEFAULT_LIMIT, DEFAULT_PAGE } from './../../common';
-import { SachRepository } from './sach.repository';
 import { SachDTO, QuerySachDTO, GenericSachReponse, QueryPaginationDTO } from './sach.dto';
 import { SachEntity } from '../../entities';
+import { TenantAwareContext } from '../database/providers';
+import { ChiTietBanHangRepository, SachRepository } from './repositories';
+
 
 @Injectable()
 export class SachService {
-  constructor(private readonly sachRepo: SachRepository) {}
+  constructor(
+    private readonly sachRepo: SachRepository,
+    private readonly chiTietBanHang: ChiTietBanHangRepository,
+    @Inject(TenantAwareContext) private readonly context: TenantAwareContext,
+    ) {}
 
   async createBook(payload: SachDTO): Promise<SachEntity> {
-    return this.sachRepo.save(this.sachRepo.create(payload));
+    const book = await this.sachRepo.save(this.sachRepo.create(payload));
+
+    await this.chiTietBanHang
+      .save(this.chiTietBanHang.create({
+       nguoiDung: { id: this.context.userId },
+       sach: book,
+       giaBan: payload.gia,
+       soLuong: payload.soLuong
+      }));
+
+    return book;
   }
 
   async getListBookByCategory(payload: QuerySachDTO): Promise<GenericSachReponse> {

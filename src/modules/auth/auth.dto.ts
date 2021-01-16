@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsEmail, IsEnum, IsNotEmpty, IsString } from 'class-validator';
+import { IsEmail, IsEnum, IsNotEmpty, IsString, IsUUID } from 'class-validator';
 import { NguoiDungEntity, NguoiDungVaiTro } from '../../entities/nguoi-dung.entity';
 
 export class TokenJWTDTO {
@@ -66,4 +66,26 @@ export class GenericNguoiDungResponsive {
   data: Partial<NguoiDungEntity>[];
   total: number;
   next: number;
+}
+
+export class AuthPayloadDTO {
+  @IsUUID()
+  tenantId: string;
+
+  @IsUUID()
+  id: string;
+
+  @IsString()
+  tenDangNhap: string;
+
+  @IsEmail()
+  email: string;
+
+  @IsEnum(NguoiDungVaiTro)
+  vaiTro: NguoiDungVaiTro;
+}
+
+export class ChangePasswordDTO {
+  @ApiProperty()
+  passwordUpdated: string;
 }

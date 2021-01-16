@@ -5,6 +5,7 @@ import { ChiTietPhieuDatHangEntity } from './chi-tiet-phieu-dat-hang.entity';
 import { LoaiSachEntity } from './loai-sach.entity';
 import { TacGiaEntity } from './tac-gia.entity';
 import { IsOptional } from 'class-validator';
+import { NguoiDungEntity } from './nguoi-dung.entity';
 
 @Entity()
 export class SachEntity extends BaseEntity {
@@ -25,6 +26,9 @@ export class SachEntity extends BaseEntity {
 
   @Column({ nullable: true})
   public nhaXuatBan: string;
+
+  @Column({ nullable: true })
+  public soLuong: number;
 
   @ManyToOne(() => LoaiSachEntity, (loai) => loai.dsSach, { onDelete: 'CASCADE' })
   public loai: LoaiSachEntity;
