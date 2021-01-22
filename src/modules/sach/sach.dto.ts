@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsNotEmpty, IsNumber, IsString, IsUrl } from 'class-validator';
-import { LoaiSachEntity, SachEntity, TacGiaEntity } from '../../entities';
+import { LoaiSachEntity, SachEntity, TacGiaEntity, TinhTrangDuyet } from '../../entities';
 
 export class SachDTO {
   @IsNotEmpty()
@@ -61,4 +61,9 @@ export class GenericSachReponse {
   data: SachEntity[];
   total: number;
   next: number;
+}
+
+export class UpdateProcessStatus {
+  @ApiProperty({ enum: TinhTrangDuyet, default: TinhTrangDuyet.duocDuyet })
+  status: TinhTrangDuyet;
 }

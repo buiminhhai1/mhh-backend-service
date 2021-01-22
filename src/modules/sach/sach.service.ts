@@ -1,6 +1,6 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { DEFAULT_LIMIT, DEFAULT_PAGE } from './../../common';
-import { SachDTO, QuerySachDTO, GenericSachReponse, QueryPaginationDTO } from './sach.dto';
+import { SachDTO, QuerySachDTO, GenericSachReponse, QueryPaginationDTO, UpdateProcessStatus } from './sach.dto';
 import { SachEntity } from '../../entities';
 import { TenantAwareContext } from '../database/providers';
 import { ChiTietBanHangRepository, SachRepository } from './repositories';
@@ -59,5 +59,15 @@ export class SachService {
 
   async deleteBook(id: string): Promise<void> {
     await this.sachRepo.delete(id);
+  }
+
+  async updateProcessSaleBook(id: string, payload: UpdateProcessStatus): Promise<void> {
+    const chiTiet = await this.chiTietBanHang.findOneOrFail(id);
+    chiTiet.tinhTrang = payload.status;
+    await this.chiTietBanHang.save(chiTiet);
+  }
+
+  async getBookById(id: string): Promise<SachEntity> {
+    return await this.sachRepo.findOneOrFail(id);
   }
 }

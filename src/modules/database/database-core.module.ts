@@ -8,6 +8,7 @@ const logger = new Logger('DatabaseModuleCore');
 
 export class DatabaseCoreModule implements OnModuleInit {
   async onModuleInit() {
+    logger.log("go to database core module init");
     // create default connection for migration scripts
     const connectionManager = getConnectionManager();
     if (!connectionManager.has('system')) {

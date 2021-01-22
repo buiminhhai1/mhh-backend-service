@@ -1,5 +1,5 @@
 import { NguoiDungEntity } from './../../entities/nguoi-dung.entity';
-import { Controller, Get, Inject } from "@nestjs/common";
+import { Controller, Get, Inject, Logger } from "@nestjs/common";
 import { ApiTags } from "@nestjs/swagger";
 import { TenantAwareContext } from "../database/providers";
 import { NguoiDungService } from "./nguoi-dung.service";
@@ -13,8 +13,11 @@ export class NguoiDungController {
     @Inject(TenantAwareContext) private readonly context: TenantAwareContext
   ) {}
 
+  private readonly logger = new Logger(NguoiDungController.name);
+
   @Get('me')
   async getUserDetail(): Promise<Partial<NguoiDungEntity>> {
+    this.logger.warn("Go to controllers")
     return omit(await this.nguoiDungService.getUserById(this.context.userId), 'matKhau');
   }
 }

@@ -1,8 +1,9 @@
-import { GenericSachReponse, QueryPaginationDTO, QuerySachDTO, SachDTO } from './sach.dto';
-import { Body, Controller, Delete, Get, Param, Post, Put, Query } from '@nestjs/common';
+import { GenericSachReponse, QueryPaginationDTO, QuerySachDTO, SachDTO, UpdateProcessStatus } from './sach.dto';
+import { Body, Controller, Delete, Get, Param, Patch, Post, Put, Query, UseGuards } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { SachService } from './sach.service';
 import { SachEntity } from '../../entities';
+import { AdminGuard } from '../auth/admin.guard';
 
 @Controller('books')
 @ApiTags('Books')
@@ -19,6 +20,11 @@ export class SachController {
     return this.sachService.getListBook(query);
   }
 
+  @Get(':id')
+  async getBookById(@Param('id') id: string): Promise<SachEntity> {
+    return this.sachService.getBookById(id);
+  }
+
   @Post()
   async createBook(@Body() payload: SachDTO): Promise<SachEntity> {
     return this.sachService.createBook(payload);
@@ -32,5 +38,11 @@ export class SachController {
   @Delete(':id')
   async deleteBook(@Param('id') id: string): Promise<void> {
     return this.sachService.deleteBook(id);
+  }
+
+  @Patch(':id/process')
+  @UseGuards(new AdminGuard())
+  async updateProcessSaleBook(@Param('id') id: string, @Body() payload: UpdateProcessStatus): Promise<void> {
+    return this.updateProcessSaleBook(id, payload);
   }
 }

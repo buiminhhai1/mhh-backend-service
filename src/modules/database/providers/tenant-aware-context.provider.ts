@@ -29,6 +29,7 @@ export const TenantAwareContextProvider = {
   provide: TenantAwareContext,
   useFactory: async (httpRequest: CustomHttpRequest) => {
     // Handle request from HTTP
+    logger.warn(' - Go to context provider');
     if (httpRequest?.tenantId) {
 
       logger.log(` - Context request from HTTP: TenantId: ${httpRequest.tenantId}`);

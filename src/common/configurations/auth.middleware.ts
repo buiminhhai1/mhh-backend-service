@@ -10,6 +10,7 @@ export class AuthMiddleware implements NestMiddleware {
   private readonly logger = new Logger(AuthMiddleware.name);
 
   async use(req: CustomHttpRequest, res: Response, next: () => void) {
+    this.logger.warn("go to middleware");
     const authorizationHeader = <string>req.headers['authorization'] || '';
     if (authorizationHeader) {
       try {

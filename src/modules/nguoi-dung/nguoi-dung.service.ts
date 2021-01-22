@@ -1,6 +1,6 @@
 import { DEFAULT_LIMIT, DEFAULT_PAGE } from './../../common/constants/pagination';
 import { omit } from 'lodash';
-import { ConflictException, Inject, Injectable, UnauthorizedException } from '@nestjs/common';
+import { ConflictException, Inject, Injectable, Logger, UnauthorizedException } from '@nestjs/common';
 import * as bcrypt from 'bcrypt';
 import { NguoiDungRepository } from './nguoi-dung.repository';
 import { CredentialDTO, GenericNguoiDungResponsive, LoginDTO, PaginationAuthDTO } from '../auth/auth.dto';
@@ -13,6 +13,7 @@ export class NguoiDungService {
     private readonly nguoiDungRepo: NguoiDungRepository,
     @Inject(TenantAwareContext) private readonly context: TenantAwareContext
   ) {}
+  private readonly logger = new Logger(NguoiDungService.name);
 
   async register(payload: CredentialDTO): Promise<Partial<NguoiDungEntity>> {
     const user = await this.nguoiDungRepo
