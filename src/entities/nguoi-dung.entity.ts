@@ -16,6 +16,9 @@ export class NguoiDungEntity extends BaseEntity {
   @Unique(['tenDangNhap'])
   public tenDangNhap: string;
 
+  @Column({ nullable: true, readonly: false })
+  public hoTen: string;
+
   @Column()
   public matKhau: string;
 

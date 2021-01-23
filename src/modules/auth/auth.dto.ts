@@ -22,7 +22,7 @@ export class CredentialDTO {
   @ApiProperty()
   @IsNotEmpty()
   @IsString()
-  public ten: string;
+  public hoTen: string;
 
   @ApiProperty()
   @IsNotEmpty()

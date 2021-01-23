@@ -17,7 +17,6 @@ export class NguoiDungController {
 
   @Get('me')
   async getUserDetail(): Promise<Partial<NguoiDungEntity>> {
-    this.logger.warn("Go to controllers")
     return omit(await this.nguoiDungService.getUserById(this.context.userId), 'matKhau');
   }
 }
