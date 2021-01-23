@@ -15,6 +15,11 @@ export class SachController {
     return this.sachService.getListBookByCategory(query);
   }
 
+  @Get('bookcreatebyuser')
+  async getBooksByUserId(@Query() query: QueryPaginationDTO): Promise<GenericSachReponse> {
+    return this.sachService.getBookByUserId(query);
+  }
+
   @Get()
   async getAllBooks(@Query() query: QueryPaginationDTO): Promise<GenericSachReponse> {
     return this.sachService.getListBook(query);
@@ -45,4 +50,5 @@ export class SachController {
   async updateProcessSaleBook(@Param('id') id: string, @Body() payload: UpdateProcessStatus): Promise<void> {
     return this.updateProcessSaleBook(id, payload);
   }
+
 }

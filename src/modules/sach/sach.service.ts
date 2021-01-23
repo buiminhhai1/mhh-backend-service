@@ -50,8 +50,8 @@ export class SachService {
     const pageNumber = +payload.page || DEFAULT_PAGE;
     const res = await this.sachRepo.createQueryBuilder('book')
       .orderBy('book.createdAt', 'ASC')
-      .limit(+payload.limit || DEFAULT_LIMIT)
-      .skip(+payload.page || DEFAULT_PAGE)
+      .limit(+payload.limit)
+      .skip(+payload.page)
       .getManyAndCount();
       const next = pageSize * (pageNumber + 1 ) < res[1] ? pageNumber+ 1: -1
       return { data: res[0], total: res[1], next };
@@ -69,5 +69,19 @@ export class SachService {
 
   async getBookById(id: string): Promise<SachEntity> {
     return await this.sachRepo.findOneOrFail(id);
+  }
+
+  async getBookByUserId(payload: QueryPaginationDTO): Promise<GenericSachReponse> {
+    const pageSize = +payload.limit || DEFAULT_LIMIT;
+    const pageNumber = +payload.page || DEFAULT_PAGE;
+    const res = await this.chiTietBanHang.createQueryBuilder('sale')
+    .leftJoinAndSelect('sale.sach', 'sach')
+    .where('sale.nguoiDung.id = :id', { id: this.context.userId })
+    .orderBy('sale.createdAt', 'ASC')
+    .limit(+payload.limit)
+    .skip(+payload.page)
+    .getManyAndCount();
+    const next = pageSize * (pageNumber + 1 ) < res[1] ? pageNumber+ 1: -1
+      return { data: res[0], total: res[1], next };
   }
 }

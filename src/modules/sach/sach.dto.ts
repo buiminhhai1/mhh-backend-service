@@ -58,7 +58,7 @@ export class QueryPaginationDTO {
   limit: string;
 }
 export class GenericSachReponse {
-  data: SachEntity[];
+  data: SachEntity[] | any[];
   total: number;
   next: number;
 }
